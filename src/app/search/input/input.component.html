@@ -1,0 +1,7 @@
+<div>
+    <mat-form-field appearance="outline" color="accent" style="width: 100%;" fxLyaoutAlign="start center"
+        fxLayoutGap="15px">
+        <mat-icon matPrefix style="padding-right: 15px;">search</mat-icon>
+        <input matInput [(ngModel)]="searchTerm" (ngModelChange)="search($event)">
+    </mat-form-field>
+</div>
