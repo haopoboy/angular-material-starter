@@ -1,4 +1,14 @@
 <div>
     <p>About x results (x seconds)</p>
-    <p>Result here for {{q}}</p>
 </div>
+<mat-divider></mat-divider>
+
+<mat-list fxLayout="column" fxLayoutGap="25px">
+    <mat-list-item *ngFor="let row of ['First', 'Seoncd', 'Third']">
+        <h1 matLine>
+            <a routerLink="/" color="accent">{{row}}</a>
+        </h1>
+        <h2 matLine>Subtitle</h2>
+        <p matLine>And more</p>
+    </mat-list-item>
+</mat-list>

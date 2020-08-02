@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
+import { SearchService } from "./../search.service";
 
 @Component({
   selector: "app-input",
@@ -10,26 +10,34 @@ import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
 })
 export class InputComponent implements OnInit {
   searchTerm = "";
-  input$ = new Subject<string>();
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private searchService: SearchService
+  ) {}
 
   ngOnInit(): void {
-    this.input$
-      .pipe(debounceTime(500), distinctUntilChanged())
+    this.searchService.input$
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        filter((input) => !!input)
+      )
       .subscribe((input) => this.routing(input));
 
+    this.searchService.clear$.subscribe(() => (this.searchTerm = ""));
+
     this.route.queryParams
-      .pipe(filter((params) => params.q))
+      .pipe(filter((params) => !!params.q))
       .subscribe((params) => (this.searchTerm = params.q));
   }
 
   routing(term: string): void {
-    const fitleredTerm = term ? term.trim() : "";
-    this.router.navigate(["search"], { queryParams: { q: fitleredTerm } });
+    this.router.navigate(["search"], { queryParams: { q: term } });
   }
 
   search(event): void {
-    this.input$.next(event);
+    this.searchService.input$.next(event);
   }
 }
