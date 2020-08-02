@@ -20,7 +20,7 @@ jobs:
       run: npm install
 
     - name: Build
-      run: npm run-script build
+      run: npm run build -- --base-href /angular-material-starter/
       
     - name: Deploy demo 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
