@@ -10,6 +10,7 @@ import { SearchService } from "./search.service";
 })
 export class SearchComponent implements OnInit, OnDestroy {
   q = "";
+  links = [];
   constructor(
     private route: ActivatedRoute,
     private searchService: SearchService
@@ -18,7 +19,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams
       .pipe(filter((params) => params.q))
-      .subscribe((params) => (this.q = params.q));
+      .subscribe((params) => this.query(params.q));
+  }
+
+  query(q: string): void {
+    this.links = [];
+    this.q = q;
+    this.searchService.query(q).subscribe((page) => {
+      this.links = page.content;
+    });
   }
 
   ngOnDestroy(): void {
