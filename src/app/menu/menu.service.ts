@@ -8,9 +8,7 @@ export class MenuService {
     .get<MenuItem[]>("api/menuItems")
     .pipe();
 
-  constructor(private http: HttpClient) {
-    this.findAll().subscribe((items) => console.log(items));
-  }
+  constructor(private http: HttpClient) {}
 
   findAll(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>("/api/menuItems");
