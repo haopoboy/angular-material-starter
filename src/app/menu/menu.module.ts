@@ -5,7 +5,6 @@ import { MatListModule } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
 import { MenuComponent } from "./menu.component";
-import { MenuService } from "./menu.service";
 
 @NgModule({
   declarations: [MenuComponent],
@@ -17,6 +16,5 @@ import { MenuService } from "./menu.service";
     MatTooltipModule,
   ],
   exports: [MenuComponent],
-  providers: [MenuService],
 })
 export class MenuModule {}
