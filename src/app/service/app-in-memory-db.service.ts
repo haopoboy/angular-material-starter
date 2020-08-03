@@ -7,8 +7,7 @@ import { MenuItem } from "../menu/menu.service";
 export class AppInMemoryDbService implements InMemoryDbService {
   constructor() {}
   createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
-    const menuItems = this.menuItems();
-    return { menuItems };
+    return { menuItems: this.menuItems() };
   }
 
   menuItems(): MenuItem[] {
