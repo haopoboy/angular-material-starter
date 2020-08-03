@@ -26,7 +26,11 @@ export class InputComponent implements OnInit {
       )
       .subscribe((input) => this.routing(input));
 
-    this.searchService.clear$.subscribe(() => (this.searchTerm = ""));
+    this.searchService.clear$.subscribe(() => {
+      this.searchTerm = "";
+      // Reset input for distinctUntilChanged()
+      this.searchService.input$.next();
+    });
 
     this.route.queryParams
       .pipe(filter((params) => !!params.q))
