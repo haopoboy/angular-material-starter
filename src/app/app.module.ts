@@ -17,7 +17,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { MenuModule } from "./menu/menu.module";
 import { SearchModule } from "./search/search.module";
 import { AppInMemoryDbService } from "./service/app-in-memory-db.service";
-import { ThemePickerModule } from "./theme-picker/theme-picker.component";
+import { ThemePickerModule } from "./theme-picker/theme-picker.module";
 
 @NgModule({
   declarations: [AppComponent],
