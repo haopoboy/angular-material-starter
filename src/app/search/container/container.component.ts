@@ -16,7 +16,7 @@ import { Link } from "./../search.service";
   template: `<mat-list-item>
     <mat-icon mat-list-icon>{{ data.data?.icon }}</mat-icon>
     <h1 mat-line fxLayoutAlign="start center">
-      <a [routerLink]="data.routerLink" color="accent">{{ data.label }}</a>
+      <a mat-button  [routerLink]="data.routerLink">{{ data.label }}</a>
     </h1>
   </mat-list-item>`,
 })
