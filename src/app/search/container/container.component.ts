@@ -16,7 +16,7 @@ import { Link } from "./../search.service";
   template: `<mat-list-item>
     <mat-icon mat-list-icon>{{ data.data?.icon }}</mat-icon>
     <h1 mat-line fxLayoutAlign="start center">
-      <a mat-button  [routerLink]="data.routerLink">{{ data.label }}</a>
+      <a mat-button [routerLink]="data.routerLink">{{ data.label }}</a>
     </h1>
   </mat-list-item>`,
 })
@@ -24,7 +24,7 @@ export class MenuItemComponent implements OnInit, ItemComponent {
   data: Link = {
     label: "None",
   };
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }
