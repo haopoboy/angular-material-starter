@@ -1,8 +1,8 @@
 <button mat-icon-button *ngIf="currentTheme !== 'dark'; else lightUpButton" (click)="lightDown()">
-    <mat-icon>brightness_2</mat-icon>
+    <mat-icon>brightness_5</mat-icon>
 </button>
 <ng-template #lightUpButton>
     <button mat-icon-button (click)="lightUp()">
-        <mat-icon>brightness_5</mat-icon>
+        <mat-icon>brightness_2</mat-icon>
     </button>
 </ng-template>

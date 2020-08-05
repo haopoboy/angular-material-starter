@@ -1,3 +1,4 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule } from "@angular/material/button";
@@ -8,11 +9,15 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { environment } from "./../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardModule } from "./dashboard/dashboard.module";
+import { MenuModule } from "./menu/menu.module";
 import { SearchModule } from "./search/search.module";
-import { ThemePickerModule } from "./theme-picker/theme-picker.component";
+import { AppInMemoryDbService } from "./service/app-in-memory-db.service";
+import { ThemePickerModule } from "./theme-picker/theme-picker.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +26,10 @@ import { ThemePickerModule } from "./theme-picker/theme-picker.component";
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    HttpClientModule,
+    environment.production
+      ? []
+      : HttpClientInMemoryWebApiModule.forRoot(AppInMemoryDbService),
     /* Material */
     MatToolbarModule,
     MatButtonModule,
@@ -30,6 +39,7 @@ import { ThemePickerModule } from "./theme-picker/theme-picker.component";
     MatTooltipModule,
     /* Custom */
     SearchModule,
+    MenuModule,
     ThemePickerModule,
     DashboardModule,
   ],

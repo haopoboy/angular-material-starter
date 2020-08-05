@@ -3,15 +3,11 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar>
-      <a mat-icon-button routerLink="/" color="accent">
+      <a routerLink="/">
         <mat-icon>gavel</mat-icon>
       </a>
     </mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link" matTooltip="Dashboard">
-        <mat-icon>dashboard</mat-icon>
-      </a>
-    </mat-nav-list>
+    <app-menu></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="app-sticky-top">
@@ -25,6 +21,10 @@
       </div>
       <span fxFlex></span>
       <app-theme-picker></app-theme-picker>
+      <a mat-button href="https://github.com/haopoboy/angular-material-starter">
+        <img class="app-logo" src="assets/github-circle-white-transparent.svg">
+        GitHub
+      </a>
     </mat-toolbar>
     <div>
       <span fxFlex></span>

@@ -1,13 +1,12 @@
 import { TestBed } from "@angular/core/testing";
+import { AppInMemoryDbService } from "./app-in-memory-db.service";
 
-import { ThemeService } from "./theme.service";
-
-describe("ThemeService", () => {
-  let service: ThemeService;
+describe("AppInMemoryDbService", () => {
+  let service: AppInMemoryDbService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ThemeService);
+    service = TestBed.inject(AppInMemoryDbService);
   });
 
   it("should be created", () => {

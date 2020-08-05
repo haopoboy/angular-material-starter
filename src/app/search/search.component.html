@@ -1,4 +1,13 @@
 <div>
-    <p>About x results (x seconds)</p>
-    <p>Result here for {{q}}</p>
+    <p>About {{links.length}} results</p>
 </div>
+<mat-divider></mat-divider>
+
+<mat-list fxLayout="column" fxLayoutGap="25px">
+    <mat-card>
+        <mat-card-content>
+            Banner
+        </mat-card-content>
+    </mat-card>
+    <app-container *ngFor="let row of links" [data]="row"></app-container>
+</mat-list>

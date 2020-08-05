@@ -1,0 +1,6 @@
+<mat-nav-list>
+    <a mat-list-item *ngFor="let row of menu.items$ | async" [routerLink]="row.routerLink"
+        routerLinkActive="active-link" matTooltip="{{row.label}}">
+        <mat-icon>{{row.icon}}</mat-icon>
+    </a>
+</mat-nav-list>
