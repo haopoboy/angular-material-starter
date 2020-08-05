@@ -19,7 +19,7 @@ export class SearchService {
   constructor(private http: HttpClient) {}
 
   query(q: string): Observable<Page<Link>> {
-    return this.http.get<Page<Link>>(`${this.url}?keyword=^${q}`);
+    return this.http.get<Page<Link>>(`${this.url}?keyword=${q}`);
   }
 }
 
