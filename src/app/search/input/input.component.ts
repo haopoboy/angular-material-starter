@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
 import { SearchService } from "./../search.service";
@@ -7,6 +7,7 @@ import { SearchService } from "./../search.service";
   selector: "app-input",
   templateUrl: "./input.component.html",
   styleUrls: ["./input.component.css"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class InputComponent implements OnInit {
   searchTerm = "";
