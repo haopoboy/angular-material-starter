@@ -14,6 +14,7 @@ import { environment } from "./../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardModule } from "./dashboard/dashboard.module";
+import { DocumentModule } from "./document/document.module";
 import { MenuModule } from "./menu/menu.module";
 import { SearchModule } from "./search/search.module";
 import { AppInMemoryDbService } from "./service/app-in-memory-db.service";
@@ -42,6 +43,7 @@ import { ThemePickerModule } from "./theme-picker/theme-picker.module";
     MenuModule,
     ThemePickerModule,
     DashboardModule,
+    DocumentModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
