@@ -1,0 +1,11 @@
+menuItems:
+  - icon: dashboard
+    label: Dashboard
+    routerLink: /dashboard
+  - icon: description
+    label: Documents
+    routerLink: /documents
+
+links:
+  - label: "Default"
+    keyword: "default"

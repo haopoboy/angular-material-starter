@@ -4,17 +4,27 @@ import {
   RequestInfo,
   ResponseOptions,
 } from "angular-in-memory-web-api";
-import { Observable } from "rxjs";
 import { MenuItem } from "../menu/menu.service";
 import { Link } from "./../search/search.service";
 import { PageImpl } from "./Page";
+import { UtilService } from "./util.service";
 
 @Injectable()
 export class AppInMemoryDbService implements InMemoryDbService {
-  constructor() {}
+  constructor(private uitl: UtilService) {}
 
-  createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
-    return { menuItems: this.menuItems(), links: this.links() };
+  async createDb(reqInfo?: RequestInfo): Promise<{}> {
+    const yaml = await (await fetch("assets/db.yml")).text();
+    const db: Db = this.uitl.asYaml().safeLoad(yaml);
+    Object.keys(db).forEach((key) => {
+      const property = db[key];
+      if (Array.isArray(property)) {
+        this.assignId(property);
+      }
+    });
+
+    this.links(db);
+    return db;
   }
 
   responseInterceptor(
@@ -37,34 +47,9 @@ export class AppInMemoryDbService implements InMemoryDbService {
     }
   }
 
-  menuItems(): MenuItem[] {
-    const data = [
-      {
-        id: 0,
-        icon: "dashboard",
-        label: "Dashboard",
-        routerLink: "/dashboard",
-      },
-      {
-        id: 0,
-        icon: "description",
-        label: "Documents",
-        routerLink: "/documents",
-      },
-    ];
-    this.assignId(data);
-    return data;
-  }
-
-  links(): Link[] {
-    let data: Link[] = [
-      {
-        label: "Default",
-        keyword: "default",
-      },
-    ];
-    data = data.concat(
-      this.menuItems().map((item) => {
+  links(db: Db): Link[] {
+    const data = db.links.concat(
+      db.menuItems.map((item) => {
         return {
           label: item.label,
           routerLink: item.routerLink,
@@ -76,6 +61,7 @@ export class AppInMemoryDbService implements InMemoryDbService {
     );
 
     this.assignId(data);
+    db.links = data;
     return data;
   }
 
@@ -84,4 +70,9 @@ export class AppInMemoryDbService implements InMemoryDbService {
       value.id = index + 1;
     });
   }
+}
+
+interface Db {
+  menuItems: MenuItem[];
+  links: Link[];
 }
