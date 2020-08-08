@@ -2,12 +2,12 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   Input,
   OnInit,
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
+import { UtilService } from "src/app/service/util.service";
 import { Link } from "./../search.service";
 
 @Component({
@@ -57,10 +57,7 @@ export class ContainerComponent implements OnInit, AfterViewInit {
   @ViewChild("container", { read: ViewContainerRef })
   container: ViewContainerRef;
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor(private cdr: ChangeDetectorRef, private util: UtilService) {
     this.components.set("menu", MenuItemComponent);
   }
 
@@ -75,17 +72,11 @@ export class ContainerComponent implements OnInit, AfterViewInit {
       return;
     }
     this.container.clear();
-
-    let componentFactory;
-    if (this.components.has(this.data.type)) {
-      componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-        this.components.get(this.data.type)
-      );
-    } else {
-      componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-        DefaultItemComponent
-      );
-    }
+    const componentFactory = this.util.createComponentFactory(
+      this.components,
+      this.data.type,
+      DefaultItemComponent
+    );
 
     const component: ItemComponent = this.container.createComponent(
       componentFactory
