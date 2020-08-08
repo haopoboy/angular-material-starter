@@ -1,0 +1,36 @@
+menuItems:
+  - icon: dashboard
+    label: Dashboard
+    routerLink: /dashboard
+  - icon: description
+    label: Documents
+    routerLink: /documents
+
+links:
+  - label: "Default"
+    keyword: "default"
+
+dashboard:
+  - title: Tasks
+    cols: 2
+    rows: 1
+  - title: Weather
+    subtitle: About this week
+    cols: 1
+    rows: 1
+    headset:
+      cols: 2
+      rows: 1
+  - title: News
+    cols: 1
+    rows: 2
+    headset:
+      cols: 2
+      rows: 1
+  - title: Documents
+    subtitle: A good way to start
+    cols: 1
+    rows: 1
+    headset:
+      cols: 2
+      rows: 1
