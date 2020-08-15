@@ -17,7 +17,35 @@ body {
 }
 
 .app-logo {
-  height: 25px;
   margin: 0 4px 3px 0;
   vertical-align: middle;
+}
+
+mat-icon.mat-card-avatar {
+  font-size: 40px;
+  color: gray;
+}
+
+mat-icon.mat-card-avatar svg {
+  transform: scale(1);
+}
+
+.empty-content {
+  color: gray;
+}
+
+.empty-content mat-icon svg {
+  transform: scale(2.5);
+}
+
+.empty-content mat-icon {
+  padding-bottom: 25px;
+}
+
+.opened {
+  color: green;
+}
+
+.closed {
+  color: red;
 }

@@ -1,9 +1,11 @@
 <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile *ngFor="let row of cards$ | async" [colspan]="row.cols" [rowspan]="row.rows">
         <mat-card class="dashboard-card">
             <mat-card-header>
+                <mat-icon mat-card-avatar *ngIf="row.icon">{{row.icon}}</mat-icon>
+                <mat-icon mat-card-avatar *ngIf="row.svgIcon" [svgIcon]="row.svgIcon"></mat-icon>
                 <mat-card-title>
-                    {{card.title}}
+                    {{row.title}}
                     <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                         <mat-icon>more_vert</mat-icon>
                     </button>
@@ -13,11 +15,11 @@
                     </mat-menu>
                 </mat-card-title>
                 <mat-card-subtitle>
-                    {{card.subtitle}}
+                    {{row.subtitle}}
                 </mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-                <app-container></app-container>
+            <mat-card-content>
+                <app-container [data]="row"></app-container>
             </mat-card-content>
         </mat-card>
     </mat-grid-tile>

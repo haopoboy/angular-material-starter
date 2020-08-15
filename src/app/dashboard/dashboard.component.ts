@@ -10,7 +10,7 @@ import { DashboardService } from "./dashboard.service";
 })
 export class DashboardComponent implements OnInit {
   /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  cards$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     mergeMap(({ matches }) => {
       return this.service.cards$.pipe(
         map((cards: any[]) => {
