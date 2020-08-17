@@ -17,4 +17,8 @@ export class DashboardService {
     .pipe(map((page) => page.content));
 
   constructor(private http: HttpClient, public github: GithubService) {}
+
+  async deleteCard(id: any): Promise<void> {
+    this.http.delete(`${this.url}/${id}`).toPromise();
+  }
 }

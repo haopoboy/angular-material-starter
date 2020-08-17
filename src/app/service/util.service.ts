@@ -34,6 +34,21 @@ export class UtilService {
     }
     return componentFactory;
   }
+
+  asArrays(array: any[]): Arrays {
+    return new Arrays(array);
+  }
+}
+
+class Arrays {
+  constructor(private array: any[]) {}
+
+  remove(element: any): void {
+    const index = this.array.indexOf(element);
+    if (index > -1) {
+      this.array.splice(index, 1);
+    }
+  }
 }
 
 /**
