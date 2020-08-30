@@ -6,6 +6,7 @@ import {
   Type,
 } from "@angular/core";
 import * as yaml from "js-yaml";
+import { v4 as uuid } from "uuid";
 
 @Injectable({
   providedIn: "root",
@@ -37,6 +38,23 @@ export class UtilService {
 
   asArrays(array: any[]): Arrays {
     return new Arrays(array);
+  }
+
+  /**
+   * Quickly prevent firing default event and NPE from original elements.
+   * @param event from element
+   */
+  preventFiringEvent(event): void {
+    if (!event) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+
+  uuid(): string {
+    return uuid();
   }
 }
 
