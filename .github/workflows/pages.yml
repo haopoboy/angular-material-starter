@@ -1,0 +1,34 @@
+name: GitHub Pages
+on:
+  push:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build -- -c pages --base-href /angular-material-starter/
+        
+    - name: Prepare demo
+      run: |
+        cp -a dist/index.html dist/404.html
+        ls -al dist/
+        
+    - name: Deploy demo 🚀
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist
+        CLEAN: true
