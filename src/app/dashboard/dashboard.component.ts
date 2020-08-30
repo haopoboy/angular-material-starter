@@ -11,19 +11,6 @@ import { DashboardService } from "./dashboard.service";
 })
 export class DashboardComponent implements OnInit {
   cards = [];
-  /** Based on the screen size, switch from standard to one column per row */
-  cards$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    mergeMap(({ matches }) => {
-      return this.service.cards$.pipe(
-        map((cards: any[]) => {
-          if (matches) {
-            cards.forEach((c) => Object.assign(c, c.headset));
-          }
-          return cards;
-        })
-      );
-    })
-  );
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -31,8 +18,27 @@ export class DashboardComponent implements OnInit {
     private util: UtilService
   ) {}
 
+  /** Based on the screen size, switch from standard to one column per row */
+  initCards$(): void {
+    this.breakpointObserver
+      .observe(Breakpoints.Handset)
+      .pipe(
+        mergeMap(({ matches }) => {
+          return this.service.cards$.pipe(
+            map((cards: any[]) => {
+              if (matches) {
+                cards.forEach((c) => Object.assign(c, c.headset));
+              }
+              return cards;
+            })
+          );
+        })
+      )
+      .subscribe((cards) => (this.cards = cards));
+  }
+
   ngOnInit(): void {
-    this.cards$.subscribe((cards) => (this.cards = cards));
+    this.initCards$();
   }
 
   async deleteCard(card: any): Promise<void> {
