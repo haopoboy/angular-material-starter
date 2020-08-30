@@ -66,9 +66,13 @@ export class AppInMemoryDbService implements InMemoryDbService {
   }
 
   assignId(data: any[]): void {
-    data.forEach((value, index) => {
-      value.id = index + 1;
+    data.forEach((value) => {
+      value.id = this.uitl.uuid();
     });
+  }
+
+  genId(): string {
+    return this.uitl.uuid();
   }
 }
 
