@@ -6,6 +6,7 @@ export class Issue {
   url = "";
   htmlUrl = "";
   title = "";
+  pullRequest?: Issue;
 }
 
 @Injectable({
@@ -17,11 +18,12 @@ export class GithubService {
   issues$ = this.http.get(`${this.baseUrl}/issues`).pipe(
     map((arr: any[]) => {
       return arr.map((row) => {
-        const issue = new Issue();
-        issue.title = row.title;
-        issue.url = row.url;
-        issue.htmlUrl = row.html_url;
-        return issue;
+        return Object.assign(new Issue(), {
+          title: row.title,
+          url: row.url,
+          htmlUrl: row.html_url,
+          pullRequest: row.pull_request,
+        });
       });
     })
   );

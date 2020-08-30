@@ -2,8 +2,15 @@
     <mat-nav-list fxFlex>
         <ng-container *ngIf="issues$ | async as issues">
             <a mat-list-item *ngFor="let row of issues" href="{{row.htmlUrl}}" target="_blank">
-                <mat-icon mat-list-icon class="opened" svgIcon="github:issue_opened"></mat-icon>
+                <mat-icon mat-list-icon *ngIf="row.pullRequest; else issueIcon" class="opened"
+                    svgIcon="github:pull_request"></mat-icon>
+                <ng-template #issueIcon>
+                    <mat-icon mat-list-icon class="opened" svgIcon="github:issue_opened"></mat-icon>
+                </ng-template>
                 <h2 mat-line>{{row.title}}</h2>
+                <button mat-icon-button (click)="util.preventFiringEvent($event); addAsTask(row)">
+                    <mat-icon>add</mat-icon>
+                </button>
             </a>
             <app-empty-content *ngIf="issues.length === 0" svgIcon="github:issue_opened" header="No issues">
             </app-empty-content>

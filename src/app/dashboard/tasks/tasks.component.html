@@ -1,0 +1,7 @@
+<mat-nav-list fxFlex>
+    <a mat-list-item *ngFor="let row of tasks">
+        <h2 mat-line>{{row.content}}</h2>
+    </a>
+    <app-empty-content *ngIf="tasks.length === 0" icon="done" header="No tasks">
+    </app-empty-content>
+</mat-nav-list>

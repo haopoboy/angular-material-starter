@@ -13,9 +13,10 @@ import { ContainerComponent } from "./container/container.component";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { DashboardComponent } from "./dashboard.component";
 import { IssuesComponent } from "./issues/issues.component";
+import { TasksComponent } from "./tasks/tasks.component";
 
 @NgModule({
-  declarations: [DashboardComponent, ContainerComponent, IssuesComponent],
+  declarations: [DashboardComponent, ContainerComponent, IssuesComponent, TasksComponent],
   imports: [
     CommonModule,
     SharedModule,

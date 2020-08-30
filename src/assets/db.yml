@@ -18,6 +18,9 @@ dashboard:
     cols: 2
     rows: 1
   - title: Tasks
+    component: tasks
+    subtitle: Show your tasks
+    icon: work
     cols: 1
     rows: 1
     headset:
@@ -36,3 +39,5 @@ dashboard:
     headset:
       cols: 2
       rows: 1
+
+tasks: []
