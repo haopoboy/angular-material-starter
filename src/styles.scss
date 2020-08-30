@@ -35,10 +35,13 @@ mat-icon.mat-card-avatar svg {
 }
 
 .empty-content mat-icon svg {
-  transform: scale(2.5);
+  transform: scale(1.5);
 }
 
 .empty-content mat-icon {
+  height: 40px;
+  width: 65px;
+  font-size: 65px;
   padding-bottom: 25px;
 }
 
