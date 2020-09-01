@@ -33,26 +33,22 @@ export class AppComponent {
   }
 
   registerGithubIcons(namespace = "github"): void {
-    this.matIconRegistry.addSvgIconInNamespace(
-      namespace,
-      "issue_opened",
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "assets/github/issue_opened.svg"
-      )
+    ["issue_opened", "issue_closed", "pull_request", "repo", "forked"].forEach(
+      (icon) => {
+        this.registerIcon(namespace, icon);
+      }
     );
+  }
+
+  registerIcon(
+    namespace: string,
+    iconName: string,
+    assetPath = `assets/github/${iconName}.svg`
+  ): void {
     this.matIconRegistry.addSvgIconInNamespace(
       namespace,
-      "issue_closed",
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "assets/github/issue_closed.svg"
-      )
-    );
-    this.matIconRegistry.addSvgIconInNamespace(
-      namespace,
-      "pull_request",
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        "assets/github/pull_request.svg"
-      )
+      iconName,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(assetPath)
     );
   }
 }
