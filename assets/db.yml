@@ -11,11 +11,18 @@ links:
     keyword: "default"
 
 dashboard:
-  - title: Tasks
+  - title: Issues
+    svgIcon: github:issue_opened
+    component: issues
+    subtitle: From GitHub
     cols: 2
     rows: 1
-  - title: Weather
-    subtitle: About this week
+    data:
+      repo: haopoboy/angular-material-starter
+  - title: Tasks
+    component: tasks
+    subtitle: Show your tasks
+    icon: work
     cols: 1
     rows: 1
     headset:
@@ -34,3 +41,5 @@ dashboard:
     headset:
       cols: 2
       rows: 1
+
+tasks: []
