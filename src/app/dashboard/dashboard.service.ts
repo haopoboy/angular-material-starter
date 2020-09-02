@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
+import { GithubService } from "../service/github.service";
 import { Page } from "../service/Page";
 
 @Injectable({
@@ -15,5 +16,9 @@ export class DashboardService {
     .get<Page<{}>>(this.url)
     .pipe(map((page) => page.content));
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public github: GithubService) {}
+
+  async deleteCard(id: any): Promise<void> {
+    this.http.delete(`${this.url}/${id}`).toPromise();
+  }
 }

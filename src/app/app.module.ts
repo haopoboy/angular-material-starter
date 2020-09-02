@@ -30,7 +30,9 @@ import { ThemePickerModule } from "./theme-picker/theme-picker.module";
     HttpClientModule,
     environment.production
       ? []
-      : HttpClientInMemoryWebApiModule.forRoot(AppInMemoryDbService),
+      : HttpClientInMemoryWebApiModule.forRoot(AppInMemoryDbService, {
+          passThruUnknownUrl: true,
+        }),
     /* Material */
     MatToolbarModule,
     MatButtonModule,

@@ -6,6 +6,7 @@ import {
   Type,
 } from "@angular/core";
 import * as yaml from "js-yaml";
+import { v4 as uuid } from "uuid";
 
 @Injectable({
   providedIn: "root",
@@ -33,6 +34,38 @@ export class UtilService {
       );
     }
     return componentFactory;
+  }
+
+  asArrays(array: any[]): Arrays {
+    return new Arrays(array);
+  }
+
+  /**
+   * Quickly prevent firing default event and NPE from original elements.
+   * @param event from element
+   */
+  preventFiringEvent(event): void {
+    if (!event) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+
+  uuid(): string {
+    return uuid();
+  }
+}
+
+class Arrays {
+  constructor(private array: any[]) {}
+
+  remove(element: any): void {
+    const index = this.array.indexOf(element);
+    if (index > -1) {
+      this.array.splice(index, 1);
+    }
   }
 }
 

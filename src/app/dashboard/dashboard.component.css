@@ -6,12 +6,12 @@
   bottom: 15px;
 }
 
+.dashboard-card mat-card-content {
+  height: 75%;
+}
+
 .more-button {
   position: absolute;
   top: 5px;
   right: 10px;
-}
-
-.dashboard-card-content {
-  text-align: center;
 }
