@@ -44,7 +44,9 @@ export class ContainerComponent implements OnInit, AfterViewInit {
       this.components,
       this.data.component
     );
-    const component = this.container.createComponent(componentFactory).instance;
+    const component = this.container.createComponent(componentFactory)
+      .instance as any;
+    component.data = this.data.data;
     this.cdr.detectChanges();
   }
 }

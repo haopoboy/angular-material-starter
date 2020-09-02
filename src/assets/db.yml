@@ -17,6 +17,8 @@ dashboard:
     subtitle: From GitHub
     cols: 2
     rows: 1
+    data:
+      repo: haopoboy/angular-material-starter
   - title: Tasks
     component: tasks
     subtitle: Show your tasks

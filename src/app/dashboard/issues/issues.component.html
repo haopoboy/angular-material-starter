@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
     <mat-nav-list fxFlex>
-        <ng-container *ngIf="issues$ | async as issues">
+        <ng-container *ngIf="repos.issues$ | async as issues">
             <a mat-list-item *ngFor="let row of issues" href="{{row.htmlUrl}}" target="_blank">
                 <mat-icon mat-list-icon *ngIf="row.pullRequest; else issueIcon" class="opened"
                     svgIcon="github:pull_request"></mat-icon>
@@ -16,14 +16,22 @@
             </app-empty-content>
         </ng-container>
     </mat-nav-list>
-    <mat-nav-list fxFlex>
-        <ng-container *ngIf="pulls$ | async as pulls">
-            <a mat-list-item *ngFor="let row of pulls" href="{{row.htmlUrl}}" target="_blank">
-                <mat-icon mat-list-icon class="opened" svgIcon="github:pull_request"></mat-icon>
-                <h2 mat-line>{{row.title}}</h2>
+    <mat-card fxFlex fxLayout="column" *ngIf="repos.repo$ | async as repo">
+        <div>
+            <a mat-button href="{{repo.htmlUrl}}" target="_blank">
+                <mat-icon mat-list-icon svgIcon="github:repo"></mat-icon>
+                {{repo.fullName}}
             </a>
-            <app-empty-content *ngIf="pulls.length === 0" svgIcon="github:pull_request" header="No pull requests">
-            </app-empty-content>
-        </ng-container>
-    </mat-nav-list>
+        </div>
+        <div>
+            <a mat-button href="{{repo.htmlUrl}}/issues" target="_blank">
+                <mat-icon mat-list-icon svgIcon="github:issue_opened"></mat-icon>
+                Open issues: {{repo.openIssues}}
+            </a>
+            <a mat-button href="{{repo.htmlUrl}}/network/members" target="_blank">
+                <mat-icon mat-list-icon svgIcon="github:forked"></mat-icon>
+                Forks: {{repo.forks}}
+            </a>
+        </div>
+    </mat-card>
 </div>
