@@ -43,3 +43,7 @@ dashboard:
       rows: 1
 
 tasks: []
+
+documents:
+  - name: READMD.md
+    url: https://raw.githubusercontent.com/haopoboy/angular-material-starter/dev/README.md
