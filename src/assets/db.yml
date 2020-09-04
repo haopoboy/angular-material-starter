@@ -45,5 +45,16 @@ dashboard:
 tasks: []
 
 documents:
-  - name: READMD.md
+  - name: Read me
     url: https://raw.githubusercontent.com/haopoboy/angular-material-starter/dev/README.md
+  - name: Markdown demo
+    content: |
+      ## Markdown demo
+
+      ### Syntax highlight
+      ```
+      const lan = "typescript";
+      ```
+
+      ### Blockquote
+      > Blockquote here
