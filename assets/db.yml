@@ -35,7 +35,9 @@ dashboard:
       cols: 2
       rows: 1
   - title: Documents
+    component: documents
     subtitle: A good way to start
+    icon: description
     cols: 1
     rows: 1
     headset:
@@ -43,3 +45,18 @@ dashboard:
       rows: 1
 
 tasks: []
+
+documents:
+  - name: Read me
+    url: https://raw.githubusercontent.com/haopoboy/angular-material-starter/dev/README.md
+  - name: Markdown demo
+    content: |
+      ## Markdown demo
+
+      ### Syntax highlight
+      ```
+      const lan = "typescript";
+      ```
+
+      ### Blockquote
+      > Blockquote here
