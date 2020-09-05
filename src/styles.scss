@@ -52,3 +52,9 @@ mat-icon.mat-card-avatar svg {
 .closed {
   color: red;
 }
+
+blockquote {
+  border-left: 3px solid;
+  padding-left: 12px;
+  filter: brightness(70%);
+}

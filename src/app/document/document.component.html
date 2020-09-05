@@ -1,1 +1,15 @@
-<p>document works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-icon mat-card-avatar>description</mat-icon>
+        <mat-card-title>{{data.name}}</mat-card-title>
+        <mat-card-subtitle *ngIf="data.url; else defaultSubtitle">{{data.url}}</mat-card-subtitle>
+        <ng-template #defaultSubtitle>
+            <mat-card-subtitle>Updated at x by someone</mat-card-subtitle>
+        </ng-template>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding: 20px">
+        <markdown *ngIf="data.url" [src]="data.url"></markdown>
+        <markdown *ngIf="data.content">{{data.content}}</markdown>
+    </mat-card-content>
+</mat-card>

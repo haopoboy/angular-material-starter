@@ -4,6 +4,7 @@ import {
   RequestInfo,
   ResponseOptions,
 } from "angular-in-memory-web-api";
+import { Doc } from "../document/document.service";
 import { MenuItem } from "../menu/menu.service";
 import { Link } from "./../search/search.service";
 import { PageImpl } from "./Page";
@@ -37,7 +38,9 @@ export class AppInMemoryDbService implements InMemoryDbService {
         ? response.body
         : (requestInfo.req as any).body;
       return response;
-    } else if (requestInfo.id) {
+    }
+    // Do not pack as Page if id is provided from request.
+    else if (requestInfo.id) {
       return response;
     } else {
       // United pageable from server
@@ -48,17 +51,30 @@ export class AppInMemoryDbService implements InMemoryDbService {
   }
 
   links(db: Db): Link[] {
-    const data = db.links.concat(
-      db.menuItems.map((item) => {
-        return {
-          label: item.label,
-          routerLink: item.routerLink,
-          keyword: item.label,
-          type: "menu",
-          data: item,
-        };
-      })
-    );
+    const data = db.links
+      .concat(
+        db.menuItems.map((item) => {
+          return {
+            label: item.label,
+            routerLink: item.routerLink,
+            keyword: item.label,
+            type: "menu",
+            data: item,
+          };
+        })
+      )
+      .concat(
+        db.documents.map((doc) => {
+          return {
+            label: doc.name,
+            icon: "description",
+            routerLink: `/documents/${doc.id}`,
+            keyword: doc.name,
+            type: "document",
+            data: doc,
+          };
+        })
+      );
 
     this.assignId(data);
     db.links = data;
@@ -79,4 +95,5 @@ export class AppInMemoryDbService implements InMemoryDbService {
 interface Db {
   menuItems: MenuItem[];
   links: Link[];
+  documents: Doc[];
 }

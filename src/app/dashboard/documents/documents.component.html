@@ -1,0 +1,8 @@
+<div fxLayout="row wrap">
+    <mat-nav-list fxFlex>
+        <a mat-list-item *ngFor="let row of data" routerLink="/documents/{{row.id}}">
+            <h2 mat-line>{{row.name}}</h2>
+            <mat-icon *ngIf="row.url">link</mat-icon>
+        </a>
+    </mat-nav-list>
+</div>
