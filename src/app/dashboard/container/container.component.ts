@@ -8,6 +8,7 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 import { UtilService } from "src/app/service/util.service";
+import { DocumentsComponent } from "../documents/documents.component";
 import { IssuesComponent } from "../issues/issues.component";
 import { TasksComponent } from "../tasks/tasks.component";
 
@@ -27,6 +28,7 @@ export class ContainerComponent implements OnInit, AfterViewInit {
   constructor(private util: UtilService, private cdr: ChangeDetectorRef) {
     this.components.set("issues", IssuesComponent);
     this.components.set("tasks", TasksComponent);
+    this.components.set("documents", DocumentsComponent);
   }
 
   ngOnInit(): void {}

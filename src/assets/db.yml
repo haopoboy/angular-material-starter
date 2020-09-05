@@ -35,7 +35,9 @@ dashboard:
       cols: 2
       rows: 1
   - title: Documents
+    component: documents
     subtitle: A good way to start
+    icon: description
     cols: 1
     rows: 1
     headset:
