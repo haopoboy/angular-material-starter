@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-header>
+        <mat-icon mat-card-avatar>code</mat-icon>
+        <mat-card-title>{{data.name}}</mat-card-title>
+        <mat-card-subtitle>Updated at x by someone</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding: 20px" fxLayout="row wrap" fxLayoutGap="20px grid">
+        <div fxFlex>
+            <button mat-stroked-button (click)="get()">get</button>
+        </div>
+        <div fxFlex fxLayout="column">
+            <code>curl -X {{method | uppercase}} {{url}}</code>
+            <pre>{{response}}</pre>
+        </div>
+    </mat-card-content>
+</mat-card>

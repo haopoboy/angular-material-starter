@@ -4,6 +4,7 @@ import {
   RequestInfo,
   ResponseOptions,
 } from "angular-in-memory-web-api";
+import { Api } from "../api/api.service";
 import { Doc } from "../document/document.service";
 import { MenuItem } from "../menu/menu.service";
 import { Link } from "./../search/search.service";
@@ -74,6 +75,17 @@ export class AppInMemoryDbService implements InMemoryDbService {
             data: doc,
           };
         })
+      )
+      .concat(
+        db.apis.map((api) => {
+          return {
+            label: api.name,
+            icon: "code",
+            routerLink: `/apis/${api.id}`,
+            keyword: `${api.name} ${api.get?.summary} ${api.post?.summary}`,
+            data: api,
+          };
+        })
       );
 
     this.assignId(data);
@@ -83,7 +95,7 @@ export class AppInMemoryDbService implements InMemoryDbService {
 
   assignId(data: any[]): void {
     data.forEach((value) => {
-      value.id = this.uitl.uuid();
+      value.id = value.id ? value.id : this.uitl.uuid();
     });
   }
 
@@ -96,4 +108,5 @@ interface Db {
   menuItems: MenuItem[];
   links: Link[];
   documents: Doc[];
+  apis: Api[];
 }

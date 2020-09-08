@@ -11,6 +11,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { environment } from "./../environments/environment";
+import { ApiModule } from "./api/api.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardModule } from "./dashboard/dashboard.module";
@@ -46,6 +47,7 @@ import { ThemePickerModule } from "./theme-picker/theme-picker.module";
     ThemePickerModule,
     DashboardModule,
     DocumentModule,
+    ApiModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -5,6 +5,9 @@ menuItems:
   - icon: description
     label: Documents
     routerLink: /documents
+  - icon: code
+    label: APIs
+    routerLink: /apis
 
 links:
   - label: "Default"
@@ -60,3 +63,15 @@ documents:
 
       ### Blockquote
       > Blockquote here
+
+apis:
+  - id: "1"
+    name: menuItems
+    get:
+      summary: Get menu items
+  - name: links
+    get:
+      summary: Get links
+  - name: documents
+    get:
+      summary: Get documents
