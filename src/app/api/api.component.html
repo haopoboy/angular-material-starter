@@ -11,7 +11,8 @@
         </div>
         <div fxFlex fxLayout="column">
             <code>curl -X {{method | uppercase}} {{url}}</code>
-            <pre>{{response}}</pre>
+            <ngx-monaco-editor fxFlex style="height: calc(100vh - 250px);" [options]="options" [(ngModel)]="response">
+            </ngx-monaco-editor>
         </div>
     </mat-card-content>
 </mat-card>

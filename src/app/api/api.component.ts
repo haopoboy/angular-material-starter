@@ -16,6 +16,10 @@ export class ApiComponent implements OnInit {
   data: Api = {};
   response = "";
   method = "";
+  options = {
+    language: "yaml",
+    readOnly: true,
+  };
   constructor(
     private service: ApiService,
     private route: ActivatedRoute,
