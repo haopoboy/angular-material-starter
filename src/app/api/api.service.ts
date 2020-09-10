@@ -21,19 +21,19 @@ class Methods {
 
   queryParameters(): Parameters {
     return new Parameters(
-      this.method.parameters.filter((p) => !p.in || "query" === p.in)
+      this.method.parameters?.filter((p) => !p.in || "query" === p.in)
     );
   }
 
   pathParameters(): Parameters {
     return new Parameters(
-      this.method.parameters.filter((p) => "path" === p.in)
+      this.method.parameters?.filter((p) => "path" === p.in)
     );
   }
 }
 
 class Parameters {
-  constructor(public values: Parameter[]) {}
+  constructor(public values: Parameter[] = []) {}
   filterFrom(params: {}): Parameter[] {
     return this.values.filter((param) => !!params[param.name]);
   }
