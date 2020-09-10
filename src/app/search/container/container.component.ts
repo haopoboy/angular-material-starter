@@ -14,7 +14,7 @@ import { Link } from "./../search.service";
   selector: "app-menu-item",
   styleUrls: ["./container.component.css"],
   template: `<mat-list-item>
-    <mat-icon mat-list-icon>{{ data.data?.icon }}</mat-icon>
+    <mat-icon mat-list-icon>{{ data.icon }}</mat-icon>
     <h1 mat-line fxLayoutAlign="start center">
       <a mat-button [routerLink]="data.routerLink">{{ data.label }}</a>
     </h1>
