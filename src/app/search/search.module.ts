@@ -10,6 +10,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import {
   ContainerComponent,
+  DefaultItemComponent,
   MenuItemComponent,
 } from "./container/container.component";
 import { InputComponent } from "./input/input.component";
@@ -21,6 +22,7 @@ import { SearchComponent } from "./search.component";
     InputComponent,
     SearchComponent,
     ContainerComponent,
+    DefaultItemComponent,
     MenuItemComponent,
   ],
   imports: [

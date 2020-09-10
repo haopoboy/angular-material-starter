@@ -24,6 +24,7 @@ export class SearchService {
 }
 
 export interface Link {
+  icon?: string;
   label: string;
   routerLink?: string;
   keyword?: string;
