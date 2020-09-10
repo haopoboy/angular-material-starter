@@ -47,29 +47,23 @@ export class ApiComponent implements OnInit {
     this.method = "get";
     const methods = this.service.forMethod(this.data.get);
 
-    const queryParameterNames = methods
+    const queryNames = methods
       .queryParameters()
       .filterFrom(params)
       .map((p) => p.name);
 
-    this.params = queryParameterNames.map((p) => `${p}=${params[p]}`).join("&");
-
-    if (this.params) {
-      this.params = `?${this.params}`;
-    }
-
-    this.pathParams = methods
-      .pathParameters()
-      .filterFrom(params)
-      .map((p) => params[p.name])
-      .join("/");
-
-    if (this.pathParams) {
-      this.pathParams = `/${this.pathParams}`;
-    }
-
+    this.setParams(params, queryNames);
     const queryParams = {};
-    queryParameterNames.forEach((p) => (queryParams[p] = params[p]));
+    queryNames.forEach((p) => (queryParams[p] = params[p]));
+
+    this.setPathParams(
+      params,
+      methods
+        .pathParameters()
+        .filterFrom(params)
+        .map((p) => p.name)
+    );
+
     const response = await this.http
       .get(`${this.url}${this.pathParams}`, {
         observe: "response",
@@ -85,5 +79,19 @@ export class ApiComponent implements OnInit {
         .keys()
         .map((k) => `${k}=${response.headers.get(k)}`),
     });
+  }
+
+  setParams(params: {}, names: string[]): void {
+    this.params = names.map((p) => `${p}=${params[p]}`).join("&");
+    if (this.params) {
+      this.params = `?${this.params}`;
+    }
+  }
+
+  setPathParams(params: {}, names: string[]): void {
+    this.pathParams = names.map((p) => params[p]).join("/");
+    if (this.pathParams) {
+      this.pathParams = `/${this.pathParams}`;
+    }
   }
 }
