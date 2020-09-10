@@ -55,6 +55,7 @@ export class AppInMemoryDbService implements InMemoryDbService {
       .concat(
         db.menuItems.map((item) => {
           return {
+            icon: item.icon,
             label: item.label,
             routerLink: item.routerLink,
             keyword: item.label,
