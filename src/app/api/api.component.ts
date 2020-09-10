@@ -20,6 +20,8 @@ export class ApiComponent implements OnInit {
     language: "yaml",
     readOnly: true,
   };
+  params = "";
+  pathParams = "";
   constructor(
     private service: ApiService,
     private route: ActivatedRoute,
@@ -41,10 +43,38 @@ export class ApiComponent implements OnInit {
     }
   }
 
-  async get(): Promise<any> {
+  async get(params: any = {}): Promise<any> {
     this.method = "get";
+    const methods = this.service.forMethod(this.data.get);
+
+    const queryParameterNames = methods
+      .queryParameters()
+      .filterFrom(params)
+      .map((p) => p.name);
+
+    this.params = queryParameterNames.map((p) => `${p}=${params[p]}`).join("&");
+
+    if (this.params) {
+      this.params = `?${this.params}`;
+    }
+
+    this.pathParams = methods
+      .pathParameters()
+      .filterFrom(params)
+      .map((p) => params[p.name])
+      .join("/");
+
+    if (this.pathParams) {
+      this.pathParams = `/${this.pathParams}`;
+    }
+
+    const queryParams = {};
+    queryParameterNames.forEach((p) => (queryParams[p] = params[p]));
     const response = await this.http
-      .get(this.url, { observe: "response" })
+      .get(`${this.url}${this.pathParams}`, {
+        observe: "response",
+        params: queryParams,
+      })
       .toPromise();
 
     this.response = this.util.asYaml().safeDump({

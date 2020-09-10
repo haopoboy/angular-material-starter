@@ -1,0 +1,13 @@
+<form #myForm="ngForm" fxLayout="column" (submit)="send.emit(myForm.form)" fxLayoutGap="15px">
+    <mat-form-field *ngFor="let row of data" appearance="outline">
+        <mat-label>{{row.name}}</mat-label>
+        <input matInput name="{{row.name}}" ngModel>
+        <mat-hint>{{row.description}}</mat-hint>
+    </mat-form-field>
+
+    <div fxLayoutGap="20px">
+        <button type="button" mat-stroked-button fxFlex (click)="clear()">Clear</button>
+        <button mat-raised-button fxFlex color="primary">GET</button>
+    </div>
+
+</form>

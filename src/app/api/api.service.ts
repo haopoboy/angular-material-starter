@@ -10,10 +10,43 @@ export class ApiService extends BaseApiService<Api> {
   constructor(http: HttpClient) {
     super(http, `${environment.apiBasePath}/apis`);
   }
+
+  forMethod(method: Method): Methods {
+    return new Methods(method);
+  }
 }
 
-interface Method {
+class Methods {
+  constructor(private method: Method) {}
+
+  queryParameters(): Parameters {
+    return new Parameters(
+      this.method.parameters.filter((p) => !p.in || "query" === p.in)
+    );
+  }
+
+  pathParameters(): Parameters {
+    return new Parameters(
+      this.method.parameters.filter((p) => "path" === p.in)
+    );
+  }
+}
+
+class Parameters {
+  constructor(public values: Parameter[]) {}
+  filterFrom(params: {}): Parameter[] {
+    return this.values.filter((param) => !!params[param.name]);
+  }
+}
+
+export interface Parameter {
+  name: string;
+  in?: "query" | "path";
+}
+
+export interface Method {
   summary?: string;
+  parameters: Parameter[];
 }
 
 export interface Api {

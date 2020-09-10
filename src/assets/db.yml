@@ -66,9 +66,24 @@ documents:
 
 apis:
   - id: "1"
-    name: menuItems
+    name: apis
+    get:
+      summary: Get APIs
+      parameters:
+        - name: id
+          in: path
+        - name: name
+        - name: get.summary
+          description: Nested property is not supported in in-mem db
+
+  - name: menuItems
     get:
       summary: Get menu items
+      parameters:
+        - name: id
+          in: path
+        - name: label
+        - name: routerLink
   - name: links
     get:
       summary: Get links

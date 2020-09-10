@@ -6,11 +6,11 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content style="padding: 20px" fxLayout="row wrap" fxLayoutGap="20px grid">
-        <div fxFlex>
-            <button mat-stroked-button (click)="get()">get</button>
+        <div fxFlex fxLayout="column" fxLayoutGap="20px">
+            <app-parameters #parameters [data]=data.get?.parameters (send)="get($event.value)"></app-parameters>
         </div>
         <div fxFlex fxLayout="column">
-            <code>curl -X {{method | uppercase}} {{url}}</code>
+            <code>curl -X {{method | uppercase}} {{url}}{{pathParams}}{{params}}</code>
             <ngx-monaco-editor fxFlex style="height: calc(100vh - 250px);" [options]="options" [(ngModel)]="response">
             </ngx-monaco-editor>
         </div>
