@@ -64,15 +64,20 @@ export class ApiComponent implements OnInit {
         .map((p) => p.name)
     );
 
-    const response = await this.http
-      .get(`${this.url}${this.pathParams}`, {
-        observe: "response",
-        params: queryParams,
-      })
-      .toPromise();
+    let response;
+    try {
+      response = await this.http
+        .get(`${this.url}${this.pathParams}`, {
+          observe: "response",
+          params: queryParams,
+        })
+        .toPromise();
+    } catch (error) {
+      response = error;
+    }
 
     this.response = this.util.asYaml().safeDump({
-      body: response.body,
+      body: response.body || "",
       status: response.status,
       statusText: response.statusText,
       headers: response.headers
