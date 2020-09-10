@@ -32,7 +32,22 @@ export class MenuItemComponent implements OnInit, ItemComponent {
 @Component({
   selector: "app-default-item",
   styleUrls: ["./container.component.css"],
-  template: `{{ data.label }}`,
+  template: `
+    <mat-list-item>
+      <mat-icon mat-list-icon>{{ data.icon }}</mat-icon>
+      <h1 mat-line fxLayoutAlign="start center">
+        <a
+          mat-button
+          *ngIf="data.routerLink; else other"
+          [routerLink]="data.routerLink"
+          >{{ data.label }}</a
+        >
+        <ng-template #other>
+          <a mat-button> {{ data.label }}</a>
+        </ng-template>
+      </h1>
+    </mat-list-item>
+  `,
 })
 export class DefaultItemComponent implements OnInit, ItemComponent {
   data: Link = {
