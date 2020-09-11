@@ -2,26 +2,27 @@ menuItems:
   - icon: dashboard
     label: Dashboard
     routerLink: /dashboard
-  - icon: description
-    label: Documents
-    routerLink: /documents
   - icon: code
     label: APIs
     routerLink: /apis
+  - icon: description
+    label: Documents
+    routerLink: /documents
 
 links:
   - label: "Default"
     keyword: "default"
 
 dashboard:
-  - title: Issues
-    svgIcon: github:issue_opened
-    component: issues
-    subtitle: From GitHub
+  - title: APIs
+    subtitle: Configure and test your APIs eaily
+    component: apis
+    icon: code
     cols: 2
     rows: 1
-    data:
-      repo: haopoboy/angular-material-starter
+    headset:
+      cols: 2
+      rows: 1
   - title: Tasks
     component: tasks
     subtitle: Show your tasks
@@ -31,12 +32,17 @@ dashboard:
     headset:
       cols: 2
       rows: 1
-  - title: News
+  - title: Issues
+    svgIcon: github:issue_opened
+    component: issues
+    subtitle: From GitHub
     cols: 1
     rows: 2
     headset:
       cols: 2
       rows: 1
+    data:
+      repo: haopoboy/angular-material-starter
   - title: Documents
     component: documents
     subtitle: A good way to start
