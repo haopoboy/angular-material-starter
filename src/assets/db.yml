@@ -2,7 +2,7 @@ menuItems:
   - icon: dashboard
     label: Dashboard
     routerLink: /dashboard
-  - icon: code
+  - icon: api
     label: APIs
     routerLink: /apis
   - icon: description
@@ -17,7 +17,7 @@ dashboard:
   - title: APIs
     subtitle: Configure and test your APIs eaily
     component: apis
-    icon: code
+    icon: api
     cols: 2
     rows: 1
     headset:
