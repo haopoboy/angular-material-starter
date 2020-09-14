@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { OpenApi } from "openapi-v3";
 import { mergeMap } from "rxjs/operators";
-import { environment } from "src/environments/environment";
 import { UtilService } from "../service/util.service";
 import { Api, ApiService } from "./api.service";
 
@@ -22,6 +22,7 @@ export class ApiComponent implements OnInit {
   };
   params = "";
   pathParams = "";
+
   constructor(
     private service: ApiService,
     private route: ActivatedRoute,
@@ -37,10 +38,8 @@ export class ApiComponent implements OnInit {
 
   initData(data: Api): void {
     this.data = data;
-    this.url = `${location.origin}${environment.apiBasePath}/${data.name}`;
-    if (data.get) {
-      this.get();
-    }
+    this.url = this.service.urlOf(data);
+    this.get();
   }
 
   async get(params: any = {}): Promise<any> {
@@ -74,6 +73,14 @@ export class ApiComponent implements OnInit {
         .toPromise();
     } catch (error) {
       response = error;
+    }
+
+    this.initResponse(response);
+  }
+
+  initResponse(response: any): void {
+    if (response.body && response.body.openapi) {
+      this.data.openApi = response.body;
     }
 
     this.response = this.util.asYaml().safeDump({

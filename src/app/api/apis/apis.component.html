@@ -1,6 +1,7 @@
 <mat-nav-list>
     <a mat-list-item *ngFor="let row of data" [routerLink]="row.id">
         <h2 mat-line>{{row.name}}</h2>
+        <p mat-line *ngIf="row.url">GET: {{row.url}}</p>
         <p mat-line *ngIf="row.get">GET: {{row.get.summary}}</p>
     </a>
 </mat-nav-list>

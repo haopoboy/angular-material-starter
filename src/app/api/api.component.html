@@ -1,6 +1,9 @@
 <mat-card>
     <mat-card-header>
-        <mat-icon mat-card-avatar>api</mat-icon>
+        <mat-icon mat-card-avatar *ngIf="data.openApi; else defaultAvatar" svgIcon="openapi"></mat-icon>
+        <ng-template #defaultAvatar>
+            <mat-icon mat-card-avatar>api</mat-icon>
+        </ng-template>
         <mat-card-title>{{data.name}}</mat-card-title>
         <mat-card-subtitle>Updated at x by someone</mat-card-subtitle>
     </mat-card-header>

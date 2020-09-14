@@ -72,7 +72,7 @@ documents:
 
 apis:
   - id: "1"
-    name: apis
+    name: /apis
     get:
       summary: Get APIs
       parameters:
@@ -81,8 +81,12 @@ apis:
         - name: name
         - name: get.summary
           description: Nested property is not supported in in-mem db
-
-  - name: menuItems
+  - id: "2"
+    name: /openapi.json
+  - id: "3"
+    name: Swagger generator
+    url: https://generator3.swagger.io/openapi.json
+  - name: /menuItems
     get:
       summary: Get menu items
       parameters:
@@ -90,9 +94,12 @@ apis:
           in: path
         - name: label
         - name: routerLink
-  - name: links
+  - name: /links
     get:
       summary: Get links
-  - name: documents
+  - name: /documents
     get:
       summary: Get documents
+openapi:
+  openapi: 3.0.1
+  paths: {}

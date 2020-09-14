@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { OpenApi } from "openapi-v3";
 import { BaseApiService } from "src/app/service/base-api.service";
 import { environment } from "src/environments/environment";
 
@@ -11,8 +12,18 @@ export class ApiService extends BaseApiService<Api> {
     super(http, `${environment.apiBasePath}/apis`);
   }
 
-  forMethod(method: Method): Methods {
+  forMethod(method: Method = {}): Methods {
     return new Methods(method);
+  }
+
+  urlOf(api: Api): string {
+    if (api.url) {
+      return api.url.startsWith("http")
+        ? api.url
+        : `${location.origin}${api.url}`;
+    } else {
+      return `${location.origin}${environment.apiBasePath}${api.name}`;
+    }
   }
 }
 
@@ -46,7 +57,7 @@ export interface Parameter {
 
 export interface Method {
   summary?: string;
-  parameters: Parameter[];
+  parameters?: Parameter[];
 }
 
 export interface Api {
@@ -54,4 +65,6 @@ export interface Api {
   name?: string;
   get?: Method;
   post?: Method;
+  url?: string;
+  openApi?: OpenApi;
 }
