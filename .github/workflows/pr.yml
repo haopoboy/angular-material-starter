@@ -20,7 +20,7 @@ jobs:
     - name: Build
       run: |
         npm run lint
-        npm run build -- -c pages
+        npm run build
         
     - name: Prepare demo
       run: |
