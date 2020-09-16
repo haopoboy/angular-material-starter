@@ -20,7 +20,7 @@ jobs:
     - name: Build
       run: |
         npm run lint
-        npm run build -- -c pages --base-href /angular-material-starter/
+        npm run build -- -c pages
         
     - name: Prepare demo
       run: |
