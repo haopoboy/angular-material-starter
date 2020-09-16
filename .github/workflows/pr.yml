@@ -34,27 +34,20 @@ jobs:
           dist
           nginx-default.conf
           Dockerfile
-        
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v1.1.1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: haopoboy/angular-material-starter
-        tag_with_ref: true
-        
+          
   deploy:
     runs-on: ubuntu-latest
-    name: Display results
     needs: build
     steps:
       - name: Download docker files
         uses: actions/download-artifact@v2
         with:
           name: dockerfiles
-      - name: For testing
-        shell: bash
-        run: |
-          ls -al
-          ls -al dist
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1.1.1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: haopoboy/angular-material-starter
+          tag_with_ref: true
 
