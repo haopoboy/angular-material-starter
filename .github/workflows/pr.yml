@@ -43,6 +43,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dockerfiles
+      - name: Start deployment
+        uses: bobheadxi/deployments@master
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: pr
       - name: Build and push Docker images
         uses: docker/build-push-action@v1.1.1
         with:
@@ -50,4 +57,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: haopoboy/angular-material-starter
           tag_with_ref: true
+      - name: Update deployment status
+        uses: bobheadxi/deployments@master
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: https://hub.docker.com/repository/docker/haopoboy/angular-material-starter/tags
 
