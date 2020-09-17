@@ -67,4 +67,9 @@ jobs:
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: https://hub.docker.com/repository/docker/haopoboy/angular-material-starter/tags?name=pr-${{github.event.number}}
+          desc: |
+            ```sh
+            sudo docker pull haopoboy/angular-material-starter:pr-${{github.event.number}}-merge \
+            && sudo docker run -p 80:80 haopoboy/angular-material-starter:pr-${{github.event.number}}-merge
+            ```
 
