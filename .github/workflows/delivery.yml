@@ -42,8 +42,8 @@ jobs:
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: ${{ github.head_ref }}
-          ref: ${{ github.head_ref }}
+          env: ${{ github.ref }}
+          ref: ${{ github.ref }}
       - name: Build and push Docker images
         uses: docker/build-push-action@v1.1.1
         with:
@@ -59,4 +59,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: https://hub.docker.com/repository/docker/haopoboy/angular-material-starter/tags?name=${{ github.head_ref }}
+          env_url: https://hub.docker.com/repository/docker/haopoboy/angular-material-starter/tags?name=${{ github.ref }}
