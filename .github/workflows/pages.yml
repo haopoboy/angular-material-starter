@@ -35,6 +35,9 @@ jobs:
         FOLDER: dist
         CLEAN: true
         
+    - name: Build for container
+      run: npm run build -- -c pages
+        
     - name: Archive pages artifacts
       uses: actions/upload-artifact@v2
       with:
@@ -58,7 +61,7 @@ jobs:
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: ${{ github.head_ref }}
+          env: pages
           ref: ${{ github.head_ref }}
 
       - name: Build and push Docker images
