@@ -4,6 +4,8 @@ import {
   RequestInfo,
   ResponseOptions,
 } from "angular-in-memory-web-api";
+import { OpenApi } from "openapi-v3";
+import { Api } from "../api/api.service";
 import { Doc } from "../document/document.service";
 import { MenuItem } from "../menu/menu.service";
 import { Link } from "./../search/search.service";
@@ -25,6 +27,7 @@ export class AppInMemoryDbService implements InMemoryDbService {
     });
 
     this.links(db);
+    this.openApi(db);
     return db;
   }
 
@@ -39,13 +42,12 @@ export class AppInMemoryDbService implements InMemoryDbService {
         : (requestInfo.req as any).body;
       return response;
     }
-    // Do not pack as Page if id is provided from request.
-    else if (requestInfo.id) {
-      return response;
-    } else {
-      // United pageable from server
+    // United pageable from server if it's array.
+    else if (Array.isArray(response.body)) {
       const page = PageImpl.of(response.body);
       response.body = page;
+      return response;
+    } else {
       return response;
     }
   }
@@ -75,6 +77,17 @@ export class AppInMemoryDbService implements InMemoryDbService {
             data: doc,
           };
         })
+      )
+      .concat(
+        db.apis.map((api) => {
+          return {
+            label: api.name,
+            icon: "code",
+            routerLink: `/apis/${api.id}`,
+            keyword: `${api.name} ${api.get?.summary} ${api.post?.summary}`,
+            data: api,
+          };
+        })
       );
 
     this.assignId(data);
@@ -82,9 +95,22 @@ export class AppInMemoryDbService implements InMemoryDbService {
     return data;
   }
 
+  openApi(db: Db): void {
+    db.apis.forEach((row) => {
+      if (row.get) {
+        db.openapi.paths[row.name] = {
+          get: {
+            summary: row.get.summary,
+            responses: {},
+          },
+        };
+      }
+    });
+  }
+
   assignId(data: any[]): void {
     data.forEach((value) => {
-      value.id = this.uitl.uuid();
+      value.id = value.id ? value.id : this.uitl.uuid();
     });
   }
 
@@ -97,4 +123,6 @@ interface Db {
   menuItems: MenuItem[];
   links: Link[];
   documents: Doc[];
+  apis: Api[];
+  openapi: OpenApi;
 }

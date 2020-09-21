@@ -2,6 +2,9 @@ menuItems:
   - icon: dashboard
     label: Dashboard
     routerLink: /dashboard
+  - icon: api
+    label: APIs
+    routerLink: /apis
   - icon: description
     label: Documents
     routerLink: /documents
@@ -11,14 +14,15 @@ links:
     keyword: "default"
 
 dashboard:
-  - title: Issues
-    svgIcon: github:issue_opened
-    component: issues
-    subtitle: From GitHub
+  - title: APIs
+    subtitle: Configure and test your APIs eaily
+    component: apis
+    icon: api
     cols: 2
     rows: 1
-    data:
-      repo: haopoboy/angular-material-starter
+    headset:
+      cols: 2
+      rows: 1
   - title: Tasks
     component: tasks
     subtitle: Show your tasks
@@ -28,12 +32,17 @@ dashboard:
     headset:
       cols: 2
       rows: 1
-  - title: News
+  - title: Issues
+    svgIcon: github:issue_opened
+    component: issues
+    subtitle: From GitHub
     cols: 1
     rows: 2
     headset:
       cols: 2
       rows: 1
+    data:
+      repo: haopoboy/angular-material-starter
   - title: Documents
     component: documents
     subtitle: A good way to start
@@ -60,3 +69,37 @@ documents:
 
       ### Blockquote
       > Blockquote here
+
+apis:
+  - id: "1"
+    name: /apis
+    get:
+      summary: Get APIs
+      parameters:
+        - name: id
+          in: path
+        - name: name
+        - name: get.summary
+          description: Nested property is not supported in in-mem db
+  - id: "2"
+    name: /openapi.json
+  - id: "3"
+    name: Swagger generator
+    url: https://generator3.swagger.io/openapi.json
+  - name: /menuItems
+    get:
+      summary: Get menu items
+      parameters:
+        - name: id
+          in: path
+        - name: label
+        - name: routerLink
+  - name: /links
+    get:
+      summary: Get links
+  - name: /documents
+    get:
+      summary: Get documents
+openapi:
+  openapi: 3.0.1
+  paths: {}

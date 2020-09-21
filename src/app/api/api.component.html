@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-header>
+        <mat-icon mat-card-avatar *ngIf="data.openApi; else defaultAvatar" svgIcon="openapi"></mat-icon>
+        <ng-template #defaultAvatar>
+            <mat-icon mat-card-avatar>api</mat-icon>
+        </ng-template>
+        <mat-card-title>{{data.name}}</mat-card-title>
+        <mat-card-subtitle>Updated at x by someone</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding: 20px" fxLayout="row wrap" fxLayoutGap="20px grid">
+        <div fxFlex fxLayout="column" fxLayoutGap="20px">
+            <app-parameters #parameters [data]=data.get?.parameters (send)="get($event.value)"></app-parameters>
+        </div>
+        <div fxFlex fxLayout="column">
+            <code>curl -X {{method | uppercase}} {{url}}{{pathParams}}{{params}}</code>
+            <ngx-monaco-editor fxFlex style="height: calc(100vh - 250px);" [options]="options" [(ngModel)]="response">
+            </ngx-monaco-editor>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -29,6 +29,8 @@ export class AppComponent {
       )
     );
 
+    ["openapi"].forEach((icon) => this.registerAssetsIcon(icon));
+
     this.registerGithubIcons();
   }
 
@@ -37,6 +39,16 @@ export class AppComponent {
       (icon) => {
         this.registerIcon(namespace, icon);
       }
+    );
+  }
+
+  registerAssetsIcon(
+    iconName: string,
+    assetPath = `assets/img/${iconName}.svg`
+  ): void {
+    this.matIconRegistry.addSvgIcon(
+      iconName,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(assetPath)
     );
   }
 
