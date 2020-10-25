@@ -56,16 +56,24 @@ dashboard:
 tasks: []
 
 documents:
-  - name: Read me
+  - id: 1
+    name: Read me
     url: https://raw.githubusercontent.com/haopoboy/angular-material-starter/dev/README.md
-  - name: Markdown demo
+  - id: 2
+    name: Markdown demo
     content: |
       ## Markdown demo
 
-      ### Syntax highlight
+      ### Code and syntax highlight
+      Signle quote `const lan = ...`
+
+      Triple quotes with Markdown
+      ```markdown
+      # Heading 1
+      ## Heading 2
+      ### Heading 3
       ```
-      const lan = "typescript";
-      ```
+
 
       ### Blockquote
       > Blockquote here
