@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-// @import "~@angular/material/prebuilt-themes/indigo-pink";
-// @import "~@angular/material/prebuilt-themes/purple-green";
+/**
+* Enable static theme if won't change styles dynamically.
+*
+* @import "~@angular/material/prebuilt-themes/indigo-pink";
+* @import "~@angular/material/prebuilt-themes/purple-green";
+**/
+
+@import "prismjs/themes/prism-okaidia";
+@import "prismjs/plugins/line-numbers/prism-line-numbers";
 
 html,
 body {
@@ -57,4 +64,15 @@ blockquote {
   border-left: 3px solid;
   padding-left: 12px;
   filter: brightness(70%);
+}
+
+/**
+* Prism handles code elements in <pre>
+**/
+*:not(pre) > code {
+  background: #272822;
+  color: #f8f8f2;
+  border-radius: 0.3em;
+  padding-left: 5px;
+  padding-right: 5px;
 }
